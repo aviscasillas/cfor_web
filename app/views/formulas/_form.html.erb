@@ -1,0 +1,9 @@
+<%= form_for [@user, @formula] do |f| %>
+ 	<%= f.label :name %>:<br />
+	<%= f.text_field :name %><br />
+
+  <%= f.label :expression %>:<br />
+  <%= f.text_area :expression %><br />
+
+  <%= f.submit %>
+<% end %>
