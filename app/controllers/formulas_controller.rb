@@ -18,6 +18,17 @@ class FormulasController < ApplicationController
 	def show
 	end
 
+	def calculate
+
+		@response = {:formula => @formula, :result => 55} # Here goes the formulas calculation engine call
+
+		respond_to do |format|
+		  format.html # show.html.erb
+		  format.xml  { render :xml => @response }
+		  format.json { render :json => @response }
+		end
+	end
+
 	def create
     @user.formulas << @formula
     redirect_to formulas_url(@user)

@@ -1,5 +1,6 @@
 class Formula
   include Mongoid::Document
+  
   field :name
   field :expression
 
