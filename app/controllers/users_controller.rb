@@ -1,18 +1,17 @@
 class UsersController < ApplicationController
 	before_filter :authenticate_user!, :only => [:edit]
 
-  before_filter :find_user
-
 	def show
+    @user = get_user(params[:id])
+    @formulas = @user.formulas
 	end
 
 	def edit
 	end
 
-  protected
+  private
 
-  def find_user
-    @user = User.find(params[:id])
-    @formulas = @user.formulas
+  def get_user(user_id)
+    User.find(user_id)
   end
 end

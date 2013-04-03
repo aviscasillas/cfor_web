@@ -1,25 +1,20 @@
 class FormulasController < ApplicationController
 	before_filter :authenticate_user!, :only => [:edit, :new]
 
-  before_filter :find_user
-  before_filter :new_formula, :only => [:new, :create]
-  before_filter :find_formula, :except => [:index, :new, :create]
-
-	def index
-		Formula.find_all_by_user_id(params[:user_id])
-	end
-
 	def new
+		@user = get_user(params[:user_id])
+    @formula = Formula.new(params[:formula])
 	end
 
 	def edit
 	end
 
 	def show
+		@formula = get_formula(params[:id])
 	end
 
 	def calculate
-
+		@formula = get_formula(params[:id])
 		@response = {:formula => @formula, :result => 55} # Here goes the formulas calculation engine call
 
 		respond_to do |format|
@@ -30,6 +25,8 @@ class FormulasController < ApplicationController
 	end
 
 	def create
+		@user = get_user(params[:user_id])
+		@formula = Formula.new(params[:formula])
     @user.formulas << @formula
     redirect_to formulas_url(@user)
 	end
@@ -40,18 +37,14 @@ class FormulasController < ApplicationController
 	def destroy
 	end
 
-	protected
+	private
 
-  def find_user
-    @user = User.find(params[:user_id])
+  def get_user(user_id)
+    User.find(user_id)
   end
 
-  def new_formula
-    @formula = Formula.new(params[:formula])
-  end
-
-  def find_formula
-    @formula = Formula.find(params[:id])
+  def get_formula(formula_id)
+    Formula.find(formula_id)
   end
 
 end
