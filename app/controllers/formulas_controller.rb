@@ -1,16 +1,20 @@
 class FormulasController < ApplicationController
 	before_filter :authenticate_user!, :only => [:edit, :new]
 
+	def show
+		@formula = get_formula(params[:id])
+	end
+
 	def new
 		@user = get_user(params[:user_id])
     @formula = Formula.new(params[:formula])
 	end
 
-	def edit
-	end
-
-	def show
-		@formula = get_formula(params[:id])
+	def create
+		@user = get_user(params[:user_id])
+		@formula = Formula.new(params[:formula])
+    @user.formulas << @formula
+    redirect_to formulas_url(@user)
 	end
 
 	def calculate
@@ -22,19 +26,6 @@ class FormulasController < ApplicationController
 		  format.xml  { render :xml => @response }
 		  format.json { render :json => @response }
 		end
-	end
-
-	def create
-		@user = get_user(params[:user_id])
-		@formula = Formula.new(params[:formula])
-    @user.formulas << @formula
-    redirect_to formulas_url(@user)
-	end
-
-	def update
-	end
-
-	def destroy
 	end
 
 	private
