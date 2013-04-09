@@ -1,5 +1,5 @@
 class FormulasController < ApplicationController
-	before_filter :authenticate_user!, :only => [:edit, :new]
+	before_filter :authenticate_user!, :only => [:new, :create]
 
 	def show
 		@formula = get_formula(params[:id])
@@ -7,14 +7,14 @@ class FormulasController < ApplicationController
 
 	def new
 		@user = get_user(params[:user_id])
-    @formula = Formula.new(params[:formula])
+    @formula = Formula.new
 	end
 
 	def create
 		@user = get_user(params[:user_id])
 		@formula = Formula.new(params[:formula])
     @user.formulas << @formula
-    redirect_to formulas_url(@user)
+    redirect_to user_formulas_url(@user)
 	end
 
 	def calculate
