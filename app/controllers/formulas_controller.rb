@@ -13,8 +13,12 @@ class FormulasController < ApplicationController
 	def create
 		@user = get_user(params[:user_id])
 		@formula = Formula.new(params[:formula])
-    @user.formulas << @formula
-    redirect_to user_formulas_url(@user)
+		if @formula.valid?
+	 		@user.formulas << @formula
+	    redirect_to [@user, @formula]
+	  else
+	  	render :new
+	  end
 	end
 
 	def calculate

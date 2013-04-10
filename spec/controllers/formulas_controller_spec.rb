@@ -37,20 +37,30 @@ describe FormulasController do
 	end
 
 	describe "POST#create" do
+		before :each do
+			sign_in @user
+		end
 		context "with valid attributes" do
-			before :each do
-				sign_in @user
-			end
 			it "saves the new formula in the database" do
 				expect{
 					post :create, user_id: @user, formula: FactoryGirl.attributes_for(:formula)
 				}.to change(Formula, :count).by(1)
 			end
-			it "redirects to the formulas path"
+			it "redirects to the new formula" do
+				post :create, user_id: @user, formula: FactoryGirl.attributes_for(:formula)
+				response.should redirect_to [@user, Formula.last]
+			end
 		end
 		context "with invalid attributes" do
-			it "does not save the new formula in the database"
-			it "re-renders the :new template"
+			it "does not save the new formula in the database" do
+				expect{
+					post :create, user_id: @user, formula: FactoryGirl.attributes_for(:invalid_formula)
+				}.to_not change(Formula, :count)
+			end
+			it "re-renders the :new template" do
+				post :create, user_id: @user, formula: FactoryGirl.attributes_for(:invalid_formula)
+				response.should render_template :new
+			end
 		end
 	end
 
