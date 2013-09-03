@@ -8,38 +8,38 @@
 </head>
 <body>
 
-	<div id="top-bar" class="contain-to-grid">
-	  <nav class="top-bar">
-	    <ul>
-	      <li class="name"><h1><%= link_to 'C-For', '/' %></h1></li>
-	      <li class="toggle-topbar"><a href="#"></a></li>
-	    </ul>
-	    <section>
-	      <ul class="left">
-	      </ul>
+  <div id="top-bar" class="contain-to-grid">
+    <nav class="top-bar">
+      <ul>
+        <li class="name"><h1><%= link_to 'C-For', '/' %></h1></li>
+        <li class="toggle-topbar"><a href="#"></a></li>
+      </ul>
+      <section>
+        <ul class="left">
+        </ul>
 
-	      <ul class="right">
-	        <% if user_signed_in? %>
-	          <li><%= link_to current_user['email'], user_path(current_user.id) %></li>
-	          <li><%= link_to 'Account', edit_user_registration_path(current_user.id) %></li>
-	          <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
-	        <% else %>
-	          <li><a href="<%= user_session_path %>">Sign In</a></li>
-	          <li><a href="<%= new_user_registration_url %>">Sign Up</a></li>
-	        <% end %>
-	      </ul>
-	    </section>
-	  </nav>
-	</div>
+        <ul class="right">
+          <% if user_signed_in? %>
+            <li><%= link_to current_user['email'], user_path(current_user.id) %></li>
+            <li><%= link_to 'Account', edit_user_registration_path(current_user.id) %></li>
+            <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
+          <% else %>
+            <li><a href="<%= user_session_path %>">Sign In</a></li>
+            <li><a href="<%= new_user_registration_url %>">Sign Up</a></li>
+          <% end %>
+        </ul>
+      </section>
+    </nav>
+  </div>
 
-	<header id="header">
-	  <div class="row">
-	    <div class="twelve columns">
-	      <h2><%= yield(:page_title) %></h2>
-	      <h4 class="subheader"><%= yield(:page_tagline) %></h4>
-	    </div>
-	  </div>
-	</header>
+  <header id="header">
+    <div class="row">
+      <div class="twelve columns">
+        <h2><%= yield(:page_title) %></h2>
+        <h4 class="subheader"><%= yield(:page_tagline) %></h4>
+      </div>
+    </div>
+  </header>
 
   <section id="main-content">
     <div class="row">

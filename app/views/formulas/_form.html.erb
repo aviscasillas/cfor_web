@@ -1,11 +1,11 @@
 <%= form_for [@user, @formula] do |f| %>
-	
-	<% @formula.errors.full_messages.each do |msg| %>
+
+  <% @formula.errors.full_messages.each do |msg| %>
     <p><%= msg %></p>
   <% end %>
 
- 	<%= f.label :name %><br />
-	<%= f.text_field :name %><br />
+  <%= f.label :name %><br />
+  <%= f.text_field :name %><br />
 
   <%= f.label :expression %><br />
   <%= f.text_area :expression %><br />

@@ -1,7 +1,7 @@
 <ul>
-	<% @formulas.each do |formula| %>
-		<li> 
-			<%= formula.name %> <%= link_to 'show', [@user, formula] %>
-		</li>
-	<% end %>
+  <% @formulas.each do |formula| %>
+    <li>
+      <%= formula.name %> <%= link_to 'show', [@user, formula] %>
+    </li>
+  <% end %>
 </ul>
